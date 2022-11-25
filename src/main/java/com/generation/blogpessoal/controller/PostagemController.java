@@ -50,7 +50,7 @@ public class PostagemController {
     public ResponseEntity<Postagem> putPostagem (@Valid @RequestBody Postagem postagem){
       //  return ResponseEntity.status(HttpStatus.OK).body(postagemRepository.save(postagem));
         return postagemRepository.findById((postagem.getId()))
-                .map(resposta -> ResponseEntity.status((HttpStatus.OK))
+                .map(resposta -> ResponseEntity.status(HttpStatus.OK)
                 .body(postagemRepository.save(postagem)))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

@@ -12,6 +12,7 @@ public class Tema {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(message = "O atributo id é Obrigatório!")
     private Long id;
 
     @NotNull(message = "O Atributo Descrição é obrigatório")

@@ -1,6 +1,7 @@
 package com.generation.blogpessoal.controller;
 
 
+import com.generation.blogpessoal.model.Postagem;
 import com.generation.blogpessoal.model.Tema;
 import com.generation.blogpessoal.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/temas")
+@RequestMapping("/temass")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TemaController {
 
@@ -34,8 +35,7 @@ public class TemaController {
     }
 
     @GetMapping("/descricao/{descricao}")
-    public ResponseEntity<List<Tema>> getByTitle(@PathVariable
-                                                 String descricao){
+    public ResponseEntity<List<Tema>> getByTitle(@PathVariable String descricao){
         return ResponseEntity.ok(temaRepository
                 .findAllByDescricaoContainingIgnoreCase(descricao));
     }
@@ -46,19 +46,19 @@ public class TemaController {
                 .body(temaRepository.save(tema));
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping
-    public ResponseEntity<Tema> put(@Valid @RequestBody Tema tema){
-        return temaRepository.findById(tema.getId())
+    public ResponseEntity<Tema> putTema(@Valid @RequestBody Tema tema){
+       return temaRepository.findById(tema.getId())
                 .map(resposta -> ResponseEntity.status(HttpStatus.CREATED)
-                        .body(temaRepository.save(tema)))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    }
+                       .body(temaRepository.save(tema)))
+               .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+   }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         Optional<Tema> tema = temaRepository.findById(id);
-
         if(tema.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 

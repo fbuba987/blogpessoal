@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -15,21 +14,18 @@ import java.time.LocalDateTime;
 @Table(name = "tb_postagens")
 public class Postagem {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "O atributo id é Obrigatório!")
-    private  Long id;
+    @NotNull(message = "O Atributo ID é Obrigatório!")
+    private Long id;
 
-
-    @NotBlank(message = "O atributo título é Obrigatório e não pode utilizar espaços em branco!")
-    @Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
+    @NotBlank(message = "O Atributo título é Obrigatório!")
+    @Size(min = 5, max = 100, message = "O Atributo título deve conter no mínimo 05 e no máximo 100 caracteres")
     private String titulo;
 
-    @NotNull(message = "O atributo texto é Obrigatório!")
-    @Size(min = 10, max = 1000, message = "O atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres")
+    @NotBlank(message = "O Atributo texto é Obrigatório!")
+    @Size(min = 10, max = 1000, message = "O Atributo texto deve conter no mínimo 10 e no máximo 1000 caracteres")
     private String texto;
-
 
     @UpdateTimestamp
     private LocalDateTime data;
@@ -38,10 +34,8 @@ public class Postagem {
     @JsonIgnoreProperties("postagem")
     private Tema tema;
 
-
-
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -49,7 +43,7 @@ public class Postagem {
     }
 
     public String getTitulo() {
-        return titulo;
+        return this.titulo;
     }
 
     public void setTitulo(String titulo) {
@@ -57,7 +51,7 @@ public class Postagem {
     }
 
     public String getTexto() {
-        return texto;
+        return this.texto;
     }
 
     public void setTexto(String texto) {
@@ -65,7 +59,7 @@ public class Postagem {
     }
 
     public LocalDateTime getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(LocalDateTime data) {
@@ -79,5 +73,6 @@ public class Postagem {
     public void setTema(Tema tema) {
         this.tema = tema;
     }
+
 
 }

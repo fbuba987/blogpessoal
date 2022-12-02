@@ -3,22 +3,23 @@ package com.generation.blogpessoal.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_temas")
+@Table(name = "tb_temass")
 public class Tema {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "O atributo id é Obrigatório!")
+    @NotNull(message = "O Atributo ID é Obrigatório!")
     private Long id;
 
-    @NotNull(message = "O Atributo Descrição é obrigatório")
+    @NotBlank(message = "O Atributo título é Obrigatório!")
     private String descricao;
 
-    @OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("tema")
     private List<Postagem> postagem;
 

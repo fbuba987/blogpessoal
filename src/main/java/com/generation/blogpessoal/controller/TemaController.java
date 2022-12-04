@@ -45,6 +45,8 @@ public class TemaController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(temaRepository.save(tema));
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping
     public ResponseEntity<Tema> putTema(@Valid @RequestBody Tema tema){
        return temaRepository.findById(tema.getId())

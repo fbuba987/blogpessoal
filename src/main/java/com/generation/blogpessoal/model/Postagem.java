@@ -78,5 +78,14 @@ public class Postagem {
         this.tema = tema;
     }
 
+    /**
+     * Métodos Get e Set para o atributo usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

@@ -92,4 +92,5 @@ public class Usuario {
         this.postagem = postagem;
     }
 
+
 }

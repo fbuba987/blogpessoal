@@ -99,21 +99,14 @@ public class UsuarioControllerTest {
         Usuario usuarioUpdate = new Usuario(usuarioCadastrado.get().getId(),
                 "Juliana Andrews Ramos", "juliana_ramos@email.com.br", "juliana123" , "https://i.imgur.com/yDRVeK7.jpg");
 
-
         HttpEntity<Usuario> corpoRequisicao = new HttpEntity<Usuario>(usuarioUpdate);
 
-
         ResponseEntity<Usuario> corpoResposta = testRestTemplate
-                .withBasicAuth("root", "root")
+                .withBasicAuth("root@root.com", "rootroot")
                 .exchange("/usuarios/atualizar", HttpMethod.PUT, corpoRequisicao, Usuario.class);
 
-
         assertEquals(HttpStatus.OK, corpoResposta.getStatusCode());
-
-
         assertEquals(corpoRequisicao.getBody().getNome(), corpoResposta.getBody().getNome());
-
-
         assertEquals(corpoRequisicao.getBody().getUsuario(), corpoResposta.getBody().getUsuario());
     }
 

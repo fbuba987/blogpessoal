@@ -46,10 +46,8 @@ public class PostagemController {
         return ResponseEntity.status(HttpStatus.CREATED).body(postagemRepository.save(postagem));
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping
     public ResponseEntity<Postagem> putPostagem (@Valid @RequestBody Postagem postagem){
-      //  return ResponseEntity.status(HttpStatus.OK).body(postagemRepository.save(postagem));
         return postagemRepository.findById((postagem.getId()))
                 .map(resposta -> ResponseEntity.status(HttpStatus.OK)
                 .body(postagemRepository.save(postagem)))

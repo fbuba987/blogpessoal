@@ -17,9 +17,6 @@ import java.util.Optional;
 @RequestMapping("/postagens")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostagemController {
-
-
-
     @Autowired
     private PostagemRepository postagemRepository;
 
@@ -54,12 +51,10 @@ public class PostagemController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
         Optional<Postagem> postagem = postagemRepository.findById(id);
-
         if(postagem.isEmpty())
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         postagemRepository.deleteById(id);

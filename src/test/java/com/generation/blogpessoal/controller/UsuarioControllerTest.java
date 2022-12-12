@@ -81,53 +81,6 @@ public class UsuarioControllerTest {
         assertEquals(HttpStatus.BAD_REQUEST, corpoResposta.getStatusCode());
     }
 
-
-    @Test
-    @Order(3)
-    @DisplayName("Atualizar um Usuário")
-    public void deveAtualizarUmUsuario() {
-        Optional<Usuario> usuarioCadastrado = usuarioService.cadastrarUsuario(new Usuario(0L,
-                "Juliana Andrews", "juliana_andrews@email.com.br", "juliana123", "https://i.imgur.com/yDRVeK7.jpg"));
-        Usuario usuarioUpdate = new Usuario(usuarioCadastrado.get().getId(),
-                "Juliana Andrews Ramos", "juliana_ramos@email.com.br", "juliana123" , "https://i.imgur.com/yDRVeK7.jpg");
-        HttpEntity<Usuario> corpoRequisicao = new HttpEntity<Usuario> (usuarioUpdate);
-        ResponseEntity<Usuario> corpoResposta = testRestTemplate
-                .withBasicAuth("root", "rootroot")
-                .exchange("/usuarios/atualizar", HttpMethod.PUT, corpoRequisicao, Usuario.class);
-        assertEquals(HttpStatus.OK, corpoResposta.getStatusCode());
-        assertEquals(corpoRequisicao.getBody().getNome(), corpoResposta.getBody().getNome());
-        assertEquals(corpoRequisicao.getBody().getUsuario(), corpoResposta.getBody().getUsuario());
-    }
-
-    @Test
-    @Order(4)
-    @DisplayName("Listar todos os Usuários")
-    public void deveMostrarTodosUsuarios() {
-        usuarioService.cadastrarUsuario(new Usuario(0L,
-                "Sabrina Sanches", "sabrina_sanches@email.com.br", "sabrina123", "https://i.imgur.com/5M2p5Wb.jpg"));
-        usuarioService.cadastrarUsuario(new Usuario(0L,
-                "Ricardo Marques", "ricardo_marques@email.com.br", "ricardo123", "https://i.imgur.com/Sk5SjWE.jpg"));
-        ResponseEntity<String> resposta = testRestTemplate
-                .withBasicAuth("root", "rootroot")
-                .exchange("/usuarios/all", HttpMethod.GET, null, String.class);
-        assertEquals(HttpStatus.OK, resposta.getStatusCode());
-
-    }
-
-    /** RESPOSTA DO DESAFIO! */
-
-    @Test
-    @Order(5)
-    @DisplayName("Listar Um Usuário Específico")
-    public void deveListarApenasUmUsuario() {
-        Optional<Usuario> usuarioBusca = usuarioService.cadastrarUsuario(new Usuario(0L,
-                "Laura Santolia", "laura_santolia@email.com.br", "laura12345", "https://i.imgur.com/EcJG8kB.jpg"));
-        ResponseEntity<String> resposta = testRestTemplate
-                .withBasicAuth("root", "rootroot")
-                .exchange("/usuarios/" + usuarioBusca.get().getId(), HttpMethod.GET, null, String.class);
-        assertEquals(HttpStatus.OK, resposta.getStatusCode());
-    }
-
     @Test
     @Order(6)
     @DisplayName("Login do Usuário")
